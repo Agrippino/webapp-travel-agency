@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using webapp_travel_agency.Data;
 using webapp_travel_agency.Models;
 
@@ -46,7 +47,7 @@ namespace webapp_travel_agency.Controllers
             }
         }
 
-
+        //metodo crea nuovo viaggio
         [HttpGet]
         public IActionResult CreaNuovoViaggio()
         {
@@ -84,6 +85,68 @@ namespace webapp_travel_agency.Controllers
                 DatabaseAgenziaDiViaggi.SaveChanges();
             }
             return View("Index");
+        }
+
+        [HttpGet]
+        public IActionResult ModificaViaggio(int id)
+        {
+            Viaggio ModificaViaggio = null;
+            List<Viaggio> ViaggiADisposizione = new List<Viaggio>();
+
+            using (AgenziaViaggioContext DatabaseAgenziaDiViaggi = new AgenziaViaggioContext())
+            {
+
+                ModificaViaggio = DatabaseAgenziaDiViaggi.Viaggi
+                 .Where(Viaggio => Viaggio.Id == id)
+                 .FirstOrDefault();
+                ViaggiADisposizione = DatabaseAgenziaDiViaggi.Viaggi.ToList<Viaggio>();
+            }
+            if (ModificaViaggio == null)
+            {
+                return NotFound();
+            }
+            else
+            {   //In questa sappaimo che il viaggio esiste e possiamo modificarlo
+                Viaggio modelloViaggioModificato = new Viaggio();
+                return View("ModificaViaggi", modelloViaggioModificato);
+            }
+        }
+        [HttpPost]
+        public IActionResult ModificaViaggio(int id,Viaggio modelloDaPassare)
+        {
+            if (!ModelState.IsValid)
+            {
+                using (AgenziaViaggioContext DatabaseAgenziaDiViaggi = new AgenziaViaggioContext())
+                {
+                    List<Viaggio> ViaggiADisposizione = DatabaseAgenziaDiViaggi.Viaggi.ToList();
+                }
+                return View("ModificaViaggi", modelloDaPassare);
+            }
+
+            Viaggio ViaggioDaModificare = null;
+            using (AgenziaViaggioContext DatabaseAgenziaDiViaggi = new AgenziaViaggioContext())
+            {
+                ViaggioDaModificare = DatabaseAgenziaDiViaggi.Viaggi
+                    .Where(Viaggio => Viaggio.Id == id)
+                    .FirstOrDefault();
+
+                if (ViaggioDaModificare != null)
+                {
+                    ViaggioDaModificare.ImmagineViaggio = modelloDaPassare.ImmagineViaggio;
+                    ViaggioDaModificare.TitoloViaggio = modelloDaPassare.TitoloViaggio;
+                    ViaggioDaModificare.DescrizioneViaggio = modelloDaPassare.DescrizioneViaggio;
+                    ViaggioDaModificare.DurataViaggio = modelloDaPassare.DurataViaggio;
+                    ViaggioDaModificare.DestinazioniViaggio = modelloDaPassare.DestinazioniViaggio;
+                    ViaggioDaModificare.CostoViaggio = modelloDaPassare.CostoViaggio;
+                    DatabaseAgenziaDiViaggi.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
         }
     }
 }
