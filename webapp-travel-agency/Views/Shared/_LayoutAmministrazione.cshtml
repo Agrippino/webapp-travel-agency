@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Amministrazione viaggi</title>
+  </head>
+  <body>
+  <header>
+   <nav class="navbar bg-light">
+      <div class="container-fluid">
+            <a class="nav-link active align-content-xxl-center" aria-current="page" href="@Url.Action("Index","AreaAmministrazione")">
+          <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+          Sezione amministrativa
+        </a>
+      </div>
+    </nav>
+    <a type="button" class="btn btn-outline-primary me-2"
+         href="@Url.Action("CreaNuovoViaggio", "AreaAmministrazione")">Aggiungi viaggio
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+        </svg>
+    </a>
+  </header>
+  <main> @RenderBody(); </main>
+  </body>
+</html>
