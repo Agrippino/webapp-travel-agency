@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using webapp_travel_agency.Data;
+using webapp_travel_agency.Models;
 
 namespace webapp_travel_agency.Controllers
 {
@@ -7,8 +9,15 @@ namespace webapp_travel_agency.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            List<Viaggio> ViaggiADisposizione = new List<Viaggio>();
 
-            return View();
+            using (AgenziaViaggioContext DatabaseAgenziaDiViaggi = new AgenziaViaggioContext())
+            {
+                ViaggiADisposizione = DatabaseAgenziaDiViaggi.Viaggi.ToList<Viaggio>();
+            }
+            return View("HomepageAmministrazione", ViaggiADisposizione);
         }
+
+        
     }
 }
