@@ -6,7 +6,7 @@ using webapp_travel_agency.Models;
 
 namespace webapp_travel_agency.Controllers
 {
-    public class AreaAmministrazione : Controller
+    public class AreaAmministrazioneController : Controller
     {
         //metodo get-Index che restituirà una pagina con tutti i viaggi 
         [HttpGet]
