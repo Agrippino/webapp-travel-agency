@@ -1,2 +1,53 @@
 ﻿@model Viaggio
 
+<div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Aggiugni un nuovo Viaggio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="@Url.Action("CreaNuovoViaggio", "AreaAmministrazione")">
+		@Html.AntiForgeryToken()
+	<div class="mb-3">
+	<strong>Imamgine Viaggio:</strong>
+	<input asp-for="@Model.ImmagineViaggio" class="d-block w-100" />
+	<label for="floatingInputInvalid">Invalid input</label>
+	<span asp-validation-for="@Model.ImmagineViaggio" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<strong>Nome Viaggio:</strong>
+		<input asp-for="@Model.TitoloViaggio" class="d-block w-100" />
+		<span asp-validation-for="@Model.TitoloViaggio" class="text-danger"></span>
+	</div>
+		<div class="mb-3">
+		<strong>Descrizione Viaggio:</strong>
+		<input asp-for="@Model.DescrizioneViaggio" class="d-block w-100" />
+		<span asp-validation-for="@Model.DescrizioneViaggio" class="text-danger"></span>
+	</div>
+		<div class="mb-3">
+		<strong>Durata del viaggio:</strong>
+		<input asp-for="@Model.DurataViaggio" class="d-block w-100" />
+		<span asp-validation-for="@Model.DurataViaggio" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<strong>Destinazioni del viaggio:</strong>
+		<input asp-for="@Model.DestinazioniViaggio" class="d-block w-100" />
+		<span asp-validation-for="@Model.DestinazioniViaggio" class="text-danger"></span>
+	</div>
+	<div class="mb-3">
+		<strong>Costo del viaggio:</strong>
+		<input asp-for="@Model.CostoViaggio" class="d-block w-100" />
+		<span asp-validation-for="@Model.CostoViaggio" class="text-danger"></span>
+	</div>
+	<strong>Categoria: </strong>
+	<div class="text-end">
+		<input type="submit" class="btn btn-small btn-info" value="Salva pizza">
+	</div>
+	</form>
+        <p>Just like that.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+        <button type="button" class="btn btn-primary">Salva Viaggio</button>
+      </div>
+    </div>
