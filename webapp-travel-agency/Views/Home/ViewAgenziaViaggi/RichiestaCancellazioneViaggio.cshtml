@@ -1,0 +1,22 @@
+﻿@model Viaggio
+
+<div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Eliminazione Viaggio </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Il viaggio:</p>
+        <br>
+        <p>@Model.TitoloViaggio verrà eliminato. </p>
+        <br>
+        <p>Sei sicuro?</p>   
+      </div>
+      <form method="post" action="@Url.Action("CancellaViaggio", "AreaAmministrazione")">
+		@Html.AntiForgeryToken()
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+        <input  type="submit" class="btn btn-danger" value="Cancella">
+      </div>
+      </form>
+    </div>
