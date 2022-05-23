@@ -55,11 +55,11 @@ namespace webapp_travel_agency.Controllers
             {
                 List<Viaggio> ViaggiADisposizione = DatabaseAgenziaDiViaggi.Viaggi.ToList();
                 Viaggio modelloDaPassare = new Viaggio();
-                              
+
                 return View("FormCreaNuovoViaggio", modelloDaPassare);
-            } 
+            }
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreaNuovoViaggio(Viaggio DatiViaggio)
@@ -112,7 +112,7 @@ namespace webapp_travel_agency.Controllers
             }
         }
         [HttpPost]
-        public IActionResult ModificaViaggio(int id,Viaggio modelloDaPassare)
+        public IActionResult ModificaViaggio(int id, Viaggio modelloDaPassare)
         {
             if (!ModelState.IsValid)
             {
@@ -147,6 +147,30 @@ namespace webapp_travel_agency.Controllers
                     return NotFound();
                 }
             }
+        }
+        [HttpPost]
+        public IActionResult CancellaViaggio(int id)
+        {
+
+            using (AgenziaViaggioContext DatabaseAgenziaDiViaggi = new AgenziaViaggioContext())
+            {
+                Viaggio ViaggioDaCancellare = DatabaseAgenziaDiViaggi.Viaggi
+                   .Where(Viaggio => Viaggio.Id == id)
+                   .First();
+
+                if (ViaggioDaCancellare != null)
+                {
+                    DatabaseAgenziaDiViaggi.Viaggi.Remove(ViaggioDaCancellare);
+                    DatabaseAgenziaDiViaggi.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+
         }
     }
 }
