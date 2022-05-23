@@ -58,5 +58,32 @@ namespace webapp_travel_agency.Controllers
                 return View("FormCreaNuovoViaggio", modelloDaPassare);
             } 
         }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreaNuovoViaggio(Viaggio DatiViaggio)
+        {
+            if (!ModelState.IsValid)
+            {
+                using (AgenziaViaggioContext DatabaseAgenziaDiViaggi = new AgenziaViaggioContext())
+                {
+                    List<Viaggio> ViaggiADisposizione = DatabaseAgenziaDiViaggi.Viaggi.ToList();
+                }
+                return View("FormCreaNuovoViaggio", DatiViaggio);
+            }
+            using (AgenziaViaggioContext DatabaseAgenziaDiViaggi = new AgenziaViaggioContext())
+            {
+                Viaggio NuovoViaggioDaAggiungere = new Viaggio();
+                NuovoViaggioDaAggiungere.ImmagineViaggio = DatiViaggio.ImmagineViaggio;
+                NuovoViaggioDaAggiungere.TitoloViaggio = DatiViaggio.TitoloViaggio;
+                NuovoViaggioDaAggiungere.DescrizioneViaggio = DatiViaggio.DescrizioneViaggio;
+                NuovoViaggioDaAggiungere.DurataViaggio = DatiViaggio.DurataViaggio;
+                NuovoViaggioDaAggiungere.DestinazioniViaggio = DatiViaggio.DestinazioniViaggio;
+                NuovoViaggioDaAggiungere.CostoViaggio = DatiViaggio.CostoViaggio;
+                DatabaseAgenziaDiViaggi.Add(DatiViaggio);
+                DatabaseAgenziaDiViaggi.SaveChanges();
+            }
+            return View("Index");
+        }
     }
 }
