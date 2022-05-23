@@ -37,13 +37,26 @@ namespace webapp_travel_agency.Controllers
                 }
                 catch (InvalidOperationException)
                 {
-                    return NotFound("Il post con id" + id + " non è stato trovato");
+                    return NotFound("Il viaggio con id" + id + " non è stato trovato");
                 }
                 catch (Exception)
                 {
                     return BadRequest();
                 }
             }
+        }
+
+
+        [HttpGet]
+        public IActionResult CreaNuovoViaggio()
+        {
+            using (AgenziaViaggioContext DatabaseAgenziaDiViaggi = new AgenziaViaggioContext())
+            {
+                List<Viaggio> ViaggiADisposizione = DatabaseAgenziaDiViaggi.Viaggi.ToList();
+                Viaggio modelloDaPassare = new Viaggio();
+                              
+                return View("FormCreaNuovoViaggio", modelloDaPassare);
+            } 
         }
     }
 }
