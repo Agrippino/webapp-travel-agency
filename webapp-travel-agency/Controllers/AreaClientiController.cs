@@ -1,0 +1,21 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using webapp_travel_agency.Data;
+using webapp_travel_agency.Models;
+
+namespace webapp_travel_agency.Controllers
+{
+    public class AreaClientiController : Controller
+    {
+        [HttpGet]
+        public IActionResult IndexClienti()
+        {
+            List<Viaggio> ViaggiADisposizione = new List<Viaggio>();
+
+            using (AgenziaViaggioContext DatabaseAgenziaDiViaggi = new AgenziaViaggioContext())
+            {
+                ViaggiADisposizione = DatabaseAgenziaDiViaggi.Viaggi.ToList<Viaggio>();
+            }
+            return View("HomepageClienti", ViaggiADisposizione);
+        }
+    }
+}
