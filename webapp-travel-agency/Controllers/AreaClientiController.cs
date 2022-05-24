@@ -7,7 +7,7 @@ namespace webapp_travel_agency.Controllers
     public class AreaClientiController : Controller
     {
         [HttpGet]
-        public IActionResult IndexClienti()
+        public IActionResult Index()
         {
             List<Viaggio> ViaggiADisposizione = new List<Viaggio>();
 

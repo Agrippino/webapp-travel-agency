@@ -8,8 +8,9 @@ namespace webapp_travel_agency.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiAreaAmministrazione : ControllerBase
+    public class ApiAreaClienti : ControllerBase
     {
+        [HttpGet]
         public IActionResult Get(string? search)
         {
             // questo controller vede se ci sono corrispondenze per con il titolo o la descrizione
