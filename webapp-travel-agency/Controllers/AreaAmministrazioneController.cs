@@ -84,7 +84,7 @@ namespace webapp_travel_agency.Controllers
                 DatabaseAgenziaDiViaggi.Add(DatiViaggio);
                 DatabaseAgenziaDiViaggi.SaveChanges();
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
