@@ -59,7 +59,23 @@
                    result.data.forEach(viaggio => {
                        document.getElementById('viaggio-div').innerHTML += 
                             `
-               
+                        <div class="container">
+                            <<div class="row me-5 text-center justify-content-center fluid">
+                              <div class="col-3">
+                                <div class="card h-100 shadow">
+                                  <img src="${viaggio.ImamgineViaggio}" class="card-img-top">
+                                  <div class="card-header text-white bg-warning mb-3 fw-bolder fs-5">"${viaggio.TitoloViaggio}" </div>
+                                <div class="card-body"> 
+                                  <p class="card-text">"${viaggio.DescrizioneViaggio}"</p>
+                                </div>
+                                <div class="card-footer bg-white">
+                                  <p class="text-succes text-warning">"${viaggio.DurataViaggio}" giorno/i - "${viaggio.DestinazioniViaggio}" destinazione/i</p>
+                                  <span class="fw-bolder">"${viaggio.CostoViaggio}" €</span> <span class="text-muted">/person</span>
+                                </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                             `
                     });
                 }
