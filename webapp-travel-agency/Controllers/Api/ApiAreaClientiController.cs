@@ -6,9 +6,9 @@ using webapp_travel_agency.Models;
 
 namespace webapp_travel_agency.Controllers.Api
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ApiAreaClienti : ControllerBase
+    public class ApiAreaClientiController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get(string? search)
@@ -19,11 +19,11 @@ namespace webapp_travel_agency.Controllers.Api
             using ( AgenziaViaggioContext DatabaseAgenziaDiViaggi = new AgenziaViaggioContext())
                 if (search != null && search != "")
                 {
-                    ViaggioApi = DatabaseAgenziaDiViaggi.Viaggi.Where(Viaggio =>Viaggio.TitoloViaggio.Contains(search) || Viaggio.DescrizioneViaggio.Contains(search)).ToList<Viaggio>();
+                    ViaggioApi = DatabaseAgenziaDiViaggi.Viaggi.Where(viaggio =>viaggio.TitoloViaggio.Contains(search) || viaggio.DescrizioneViaggio.Contains(search)).ToList<Viaggio>();
                 }
                 else
                 {
-                    ViaggioApi = DatabaseAgenziaDiViaggi.Viaggi.Include(Viaggio => Viaggio.Id).ToList<Viaggio>();
+                    ViaggioApi = DatabaseAgenziaDiViaggi.Viaggi.ToList<Viaggio>();
                 }
 
             return Ok(ViaggioApi);
