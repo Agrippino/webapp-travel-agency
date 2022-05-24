@@ -30,8 +30,7 @@ namespace webapp_travel_agency.Controllers
                 try
                 {
                     // metodo per cercare i viaggi siponibili 
-                    Viaggio TrovaViaggio = DatabaseAgenziaDiViaggi.Viaggi.Where(Viaggio => Viaggio.Id == id)
-                            .Include(Viaggio => Viaggio.Id)
+                    Viaggio TrovaViaggio = DatabaseAgenziaDiViaggi.Viaggi.Where(viaggio => viaggio.Id == id)
                             .FirstOrDefault();
 
                     return View("DettagliViaggio", TrovaViaggio);
